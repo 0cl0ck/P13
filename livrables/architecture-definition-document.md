@@ -26,6 +26,7 @@ Ce document décrit l'architecture logicielle et technique de l'application **Yo
 - Améliorer l'expérience client: parcours de réservation fluide, suivi et historique accessibles.
 - Optimiser le support: gestion des tickets et chat en temps réel pour une meilleure réactivité.
 - Faciliter l'intégration: fournir une API aux agences pour opérer sur clients et réservations.
+- Assurer l'observabilité: exposition de métriques et centralisation des logs dès la V1.
 
 ---
 
@@ -35,6 +36,8 @@ Ce document décrit l'architecture logicielle et technique de l'application **Yo
 - **Hybridation des données :** Utilisation d'une base de données relationnelle (PostgreSQL) pour les données transactionnelles critiques et d'une base NoSQL (MongoDB) pour les données non structurées et temps réel (chat).
 - **Sécurité par conception :** Application des principes de l'OWASP Top 10, authentification via JWT, et communication sécurisée (HTTPS).
 - **Scalabilité et élasticité :** L'infrastructure sera conteneurisée (Docker) et déployée sur un cloud managé pour s'adapter à la charge.
+- **Interopérabilité :** API RESTful documentée (OpenAPI) permettant aux agences de réaliser des opérations CRUD sur clients et réservations, tout en respectant la norme ACRISS pour les véhicules.
+- **Observabilité :** Collecte centralisée des logs et exposition de métriques via Prometheus et une stack ELK/Loki.
 
 ---
 
@@ -127,10 +130,17 @@ graph TD
                 MongoDB["DB (MongoDB)"]
             end
 
+            subgraph "Observabilité"
+                Prometheus["Prometheus"]
+                ELK["ELK/Loki"]
+            end
+
             LB --> WebContainer
             WebContainer --> AppContainer
             AppContainer --> PostgreSQL
             AppContainer --> MongoDB
+            AppContainer --> Prometheus
+            AppContainer --> ELK
         end
     end
 
@@ -168,9 +178,9 @@ graph TD
 
 ## Justification de l’approche architecturale
 - Alignement sur les objectifs métier : parcours client fluide, support réactif, intégration agences via API.
-- Respect des principes d’architecture : séparation des responsabilités, modularité, sécurité par conception.
-- Normes et bonnes pratiques : APIs REST, OWASP Top 10, gestion des secrets, CI/CD.
-- Avantages : simplicité de déploiement (monolithe modulaire), évolutivité maîtrisée, coûts optimisés.
+- Respect des principes d’architecture : séparation des responsabilités, modularité, sécurité par conception, observabilité et interopérabilité.
+- Normes et bonnes pratiques : APIs REST documentées (OpenAPI), OWASP Top 10, gestion des secrets, CI/CD.
+- Avantages : simplicité de déploiement (monolithe modulaire), suivi en production (métriques et logs) et évolutivité maîtrisée.
 
 ---
 

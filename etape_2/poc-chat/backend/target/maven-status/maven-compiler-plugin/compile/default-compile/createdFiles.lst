@@ -1,0 +1,6 @@
+com\yourcar\yourway\service\ChatService.class
+com\yourcar\yourway\BackendApplication.class
+com\yourcar\yourway\controller\ChatController.class
+com\yourcar\yourway\model\ChatMessage.class
+com\yourcar\yourway\config\WebSocketConfig.class
+com\yourcar\yourway\repository\ChatMessageRepository.class

@@ -1,0 +1,36 @@
+[
+  {
+    "conversation_id": "64d2f0a9a5b1c2d3e4f56701",
+    "customer_id": 1,
+    "agent_id": 101,
+    "created_at": { "$date": "2025-08-28T12:00:00.000Z" },
+    "messages": [
+      {
+        "message_id": "64d2f0a9a5b1c2d3e4f56702",
+        "sender": "customer",
+        "timestamp": { "$date": "2025-08-28T12:00:05.000Z" },
+        "content": "Bonjour, j’ai un souci avec ma réservation."
+      },
+      {
+        "message_id": "64d2f0a9a5b1c2d3e4f56703",
+        "sender": "agent",
+        "timestamp": { "$date": "2025-08-28T12:00:20.000Z" },
+        "content": "Bonjour ! Pouvez-vous me donner votre numéro de réservation ?"
+      }
+    ]
+  },
+  {
+    "conversation_id": "64d2f0a9a5b1c2d3e4f56711",
+    "customer_id": 2,
+    "agent_id": null,
+    "created_at": { "$date": "2025-08-28T14:30:00.000Z" },
+    "messages": [
+      {
+        "message_id": "64d2f0a9a5b1c2d3e4f56712",
+        "sender": "customer",
+        "timestamp": { "$date": "2025-08-28T14:30:10.000Z" },
+        "content": "Bonjour, je voudrais savoir si je peux prolonger ma location."
+      }
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+package com.yourcar.yourway.controller;
+
+import com.yourcar.yourway.model.ChatMessage;
+import com.yourcar.yourway.service.ChatService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class ChatController {
+
+    private final ChatService chatService;
+
+    @Autowired
+    public ChatController(ChatService chatService) {
+        this.chatService = chatService;
+    }
+
+    @MessageMapping("/chat.sendMessage")
+    @SendTo("/topic/public")
+    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
+        return chatService.saveMessage(chatMessage);
+    }
+
+}
